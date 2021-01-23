@@ -1,10 +1,7 @@
 package com.lolka.Springsecurityexample.rest;
 
 import com.lolka.Springsecurityexample.model.Developer;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -32,4 +29,17 @@ public class DeveloperRestControllerV1 {
                 .findFirst()
                 .orElse(null);
     }
+
+    @PostMapping
+    public Developer create(@RequestBody Developer developer){
+        this.DEVELOPERS.add(developer);
+        return developer;
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteById(@PathVariable Long id){
+        this.DEVELOPERS.removeIf(developer -> developer.getId().equals(id));
+    }
+
+
 }
